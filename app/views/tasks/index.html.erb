@@ -1,0 +1,33 @@
+<h1>タスク</h1>
+
+<%# この辺にフォームを作る %>
+<%= form_with(model: [@input_task] ,url: tasks_path, local: true, method: :post ) do |f| %>
+    <%= f.text_field :task, placeholder: "タスクを入力してください" %>
+    <%= f.submit "登録" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>タスク一覧</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+        <tr>
+            <td><%= task.task %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# エラーメッセージ %>
+<% if @err_message.present? %>
+    <h3 style="color: red"><%= @err_message %></h3>
+<% end %>
+
+<%# タスクが存在しない場合 %>
+<% if @no_tasks_message.present? %>
+    <span><%= @no_tasks_message %></span>
+<% end %>
