@@ -11,16 +11,7 @@
 
   <body>
     <%# サインインしてなければログイン画面に遷移 %>
-    <header>
-      <nav>
-        <% if user_signed_in? %>
-          <%# <strong><%= link_to current_user.name, auth_show_path %></strong> %>
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'ログイン', new_user_session_path %>
-        <% end %>
-      </nav>
-    </header>
+    <%= render "shared/header" %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
