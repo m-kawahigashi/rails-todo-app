@@ -2,6 +2,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:edit, :update, :destroy]
 
     def index
+        p "川東 aaa"
         @tasks = Task.select(:task, :user_id).where(user_id: current_user.id)
         @input_task = Task.new
         # binding.pry
