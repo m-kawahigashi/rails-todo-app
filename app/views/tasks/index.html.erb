@@ -32,10 +32,6 @@
     <h3 style="color: red"><%= @err_message %></h3>
 <% end %>
 
-<% if @update_err_message.present? %>
-    <h3 style="color: red"><%= @update_err_message %></h3>
-<% end %>
-
 <%# タスクが存在しない場合 %>
 <% if @no_tasks_message.present? %>
     <span><%= @no_tasks_message %></span>
