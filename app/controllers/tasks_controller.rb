@@ -2,7 +2,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:edit, :update, :destroy]
 
     def index
-        @tasks = Task.select(:task, :user_id).where(user_id: current_user.id)
+        @tasks = Task.select(:id, :task, :user_id).where(user_id: current_user.id)
         @input_task = Task.new
         # binding.pry
 
@@ -19,7 +19,21 @@ class TasksController < ApplicationController
             # binding.pry
             @err_message = "タスクの登録に失敗しました。"
         end
-        redirect_to root_path
+        redirect_to tasks_path
+    end
+
+    def edit
+    end
+
+    def update
+        begin
+            @current_task.update!(task_params)
+        rescue => e
+            p e
+            @update_err_message = "タスクの編集に失敗しました。"
+            render 'edit' and return
+        end
+        redirect_to tasks_path and return
     end
 
     private

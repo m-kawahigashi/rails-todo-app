@@ -1,0 +1,13 @@
+<h1>タスク編集</h1>
+
+<%# エラーメッセージ %>
+<% if @update_err_message.present? %>
+    <h3 style="color: red"><%= @update_err_message %></h3>
+<% end %>
+
+<%= form_with(model: @current_task, local: true ) do |f| %>
+  <div><%= f.text_field :task %></div>
+  <div><%= f.submit %></div>
+<% end %>
+
+<%= link_to '戻る', tasks_path %>
