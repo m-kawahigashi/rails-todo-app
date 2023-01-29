@@ -1,20 +1,19 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:edit, :update, :destroy]
-    before_action :set_task_list, only: [:index, :create]
+    before_action :set_task_list, only: [:index, :create, :destroy]
 
     def index
         # before_actionでset_task_list呼び出し
     end
 
     def create
+        # before_actionでset_task_list呼び出し
         begin
             @task = Task.new(task_params)
             @task.save!
         rescue ActiveRecord::RecordInvalid => e
-            # before_actionでset_task_list呼び出し
-
             p e
-            @create_err_message = e.message
+            @err_message = e.message
             render 'index' and return
         end
         redirect_to tasks_path and return
@@ -30,6 +29,19 @@ class TasksController < ApplicationController
             p e
             @update_err_message = e.message
             render 'edit' and return
+        end
+        redirect_to tasks_path and return
+    end
+
+    def destroy
+        # before_actionでset_task_list呼び出し
+        begin
+            @current_task.destroy! if @current_task.user_id == current_user.id
+            # raise NoMethodError, "削除できません"
+        rescue ActiveRecord::RecordInvalid => e
+            p e
+            @err_message = e.message
+            render 'index' and return
         end
         redirect_to tasks_path and return
     end

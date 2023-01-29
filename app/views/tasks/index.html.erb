@@ -7,8 +7,8 @@
 <% end %>
 
 <%# エラーメッセージ %>
-<% if @create_err_message.present? %>
-    <h3 style="color: red"><%= @create_err_message %></h3>
+<% if @err_message.present? %>
+    <h3 style="color: red"><%= @err_message %></h3>
 <% end %>
 
 <table>
@@ -25,6 +25,9 @@
               <%= task.task %>
               <%= link_to edit_task_path(task.id) do %>
                 <button>編集</button>
+              <% end%>
+              <%= link_to task_path(task.id), method: :delete do %>
+                <button>削除</button>
               <% end%>
             </td>
         </tr>
