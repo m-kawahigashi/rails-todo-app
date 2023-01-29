@@ -3,9 +3,7 @@
 <%# エラーメッセージ %>
 <%= render "shared/error_message" %>
 
-<%= form_with(model: @current_task, local: true ) do |f| %>
-  <div><%= f.text_field :task %></div>
-  <div><%= f.submit %></div>
-<% end %>
+<%# フォーム %>
+<%= render "shared/form", task_model: @current_task %>
 
 <%= link_to '戻る', tasks_path %>
