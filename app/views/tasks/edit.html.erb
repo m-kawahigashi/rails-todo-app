@@ -1,9 +1,7 @@
 <h1>タスク編集</h1>
 
 <%# エラーメッセージ %>
-<% if @update_err_message.present? %>
-    <h3 style="color: red"><%= @update_err_message %></h3>
-<% end %>
+<%= render "shared/error_message" %>
 
 <%= form_with(model: @current_task, local: true ) do |f| %>
   <div><%= f.text_field :task %></div>

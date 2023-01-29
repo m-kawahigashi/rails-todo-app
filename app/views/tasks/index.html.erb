@@ -4,9 +4,7 @@
 <%= render "shared/form" %>
 
 <%# エラーメッセージ %>
-<% if @err_message.present? %>
-    <h3 style="color: red"><%= @err_message %></h3>
-<% end %>
+<%= render "shared/error_message" %>
 
 <table>
   <thead>
