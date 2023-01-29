@@ -1,25 +1,23 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:edit, :update, :destroy]
+    before_action :set_task_list, only: [:index, :create]
 
     def index
-        @tasks = Task.select(:id, :task, :user_id).where(user_id: current_user.id)
-        @input_task = Task.new
-        # binding.pry
-
-        @no_tasks_message = "タスクが登録されていません。" if @tasks.empty?
+        # before_actionでset_task_list呼び出し
     end
 
     def create
-        # binding.pry
-        @task = Task.new(task_params)
-
         begin
+            @task = Task.new(task_params)
             @task.save!
-        rescue => e
-            # binding.pry
-            @err_message = "タスクの登録に失敗しました。"
+        rescue ActiveRecord::RecordInvalid => e
+            # before_actionでset_task_list呼び出し
+
+            p e
+            @create_err_message = e.message
+            render 'index' and return
         end
-        redirect_to tasks_path
+        redirect_to tasks_path and return
     end
 
     def edit
@@ -28,9 +26,9 @@ class TasksController < ApplicationController
     def update
         begin
             @current_task.update!(task_params)
-        rescue => e
+        rescue ActiveRecord::RecordInvalid => e
             p e
-            @update_err_message = "タスクの編集に失敗しました。"
+            @update_err_message = e.message
             render 'edit' and return
         end
         redirect_to tasks_path and return
@@ -43,5 +41,11 @@ class TasksController < ApplicationController
 
     def set_task
         @current_task = Task.find(params[:id])
+    end
+
+    def set_task_list
+        @tasks = Task.select(:id, :task, :user_id).where(user_id: current_user.id)
+        @input_task = Task.new
+        @no_tasks_message = "タスクが登録されていません。" if @tasks.empty?
     end
 end
