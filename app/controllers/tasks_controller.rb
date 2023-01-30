@@ -26,7 +26,7 @@ class TasksController < ApplicationController
             @current_task.update!(task_params)
         rescue ActiveRecord::RecordInvalid => e
             p e
-            redirect_to edit_task_path(@current_task.id), flash: { error: e.message} and return
+            redirect_to edit_task_path(@current_task.id), flash: { error: e.message } and return
         end
         redirect_to tasks_path and return
     end
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
             @current_task.destroy! if @current_task.user_id == current_user.id
         rescue ActiveRecord::RecordInvalid => e
             p e
-            redirect_to tasks_path, flash: { error: e.message} and return
+            redirect_to tasks_path, flash: { error: e.message } and return
         end
         redirect_to tasks_path and return
     end
