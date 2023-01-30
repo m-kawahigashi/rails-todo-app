@@ -13,8 +13,7 @@ class TasksController < ApplicationController
             @task.save!
         rescue ActiveRecord::RecordInvalid => e
             p e
-            @err_message = e.message
-            render 'index' and return
+            redirect_to tasks_path, flash: { error: e.message} and return
         end
         redirect_to tasks_path and return
     end
@@ -27,8 +26,7 @@ class TasksController < ApplicationController
             @current_task.update!(task_params)
         rescue ActiveRecord::RecordInvalid => e
             p e
-            @err_message = e.message
-            render 'edit' and return
+            redirect_to edit_task_path(@current_task.id), flash: { error: e.message} and return
         end
         redirect_to tasks_path and return
     end
@@ -37,11 +35,9 @@ class TasksController < ApplicationController
         # before_actionでset_task_list呼び出し
         begin
             @current_task.destroy! if @current_task.user_id == current_user.id
-            # raise NoMethodError, "削除できません"
         rescue ActiveRecord::RecordInvalid => e
             p e
-            @err_message = e.message
-            render 'index' and return
+            redirect_to tasks_path, flash: { error: e.message} and return
         end
         redirect_to tasks_path and return
     end

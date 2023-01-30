@@ -31,3 +31,7 @@ table {
 .edit-form {
     display: flex;
 }
+
+.error-message {
+    text-align: center;
+}
