@@ -1,3 +1,5 @@
-<% if @err_message.present? %>
-    <h3 style="color: red"><%= @err_message %></h3>
+<% if flash[:error].present? %>
+    <div class="error-message">
+        <h3 style="color: red"><%= flash[:error] %></h3>
+    </div>
 <% end %>
