@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:edit, :update, :destroy]
-    before_action :set_task_list, only: [:index, :create, :destroy]
 
     def index
-        # before_actionでset_task_list呼び出し
+        @tasks = Task.select(:id, :task, :user_id).where(user_id: current_user.id)
+        @input_task = Task.new
+        @no_tasks_message = "タスクが登録されていません。" if @tasks.empty?
     end
 
     def create
-        # before_actionでset_task_list呼び出し
         begin
             @task = Task.new(task_params)
             @task.save!
@@ -32,7 +32,6 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        # before_actionでset_task_list呼び出し
         begin
             @current_task.destroy! if @current_task.user_id == current_user.id
         rescue ActiveRecord::RecordInvalid => e
@@ -49,11 +48,5 @@ class TasksController < ApplicationController
 
     def set_task
         @current_task = Task.find(params[:id])
-    end
-
-    def set_task_list
-        @tasks = Task.select(:id, :task, :user_id).where(user_id: current_user.id)
-        @input_task = Task.new
-        @no_tasks_message = "タスクが登録されていません。" if @tasks.empty?
     end
 end
