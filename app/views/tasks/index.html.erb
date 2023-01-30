@@ -1,34 +1,38 @@
-<h1>タスク</h1>
-
 <%# フォーム %>
-<%= render "shared/form", task_model: @input_task %>
+<%# <div class="input-form"> %>
+  <%= render "shared/form", task_model: @input_task %>
+<%# </div> %>
 
 <%# エラーメッセージ %>
-<%= render "shared/error_message" %>
+<div>
+  <%= render "shared/error_message" %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>タスク一覧</th>
-    </tr>
-  </thead>
+<div class="table-block">
+  <table>
+    <thead>
+      <tr>
+        <th>タスク一覧</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-        <tr>
-            <td>
-              <%= task.task %>
-              <%= link_to edit_task_path(task.id) do %>
-                <button>編集</button>
-              <% end%>
-              <%= link_to task_path(task.id), method: :delete do %>
-                <button>削除</button>
-              <% end%>
-            </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @tasks.each do |task| %>
+          <tr>
+              <td>
+                <%= task.task %>
+                <%= link_to edit_task_path(task.id) do %>
+                  <button>編集</button>
+                <% end%>
+                <%= link_to task_path(task.id), method: :delete do %>
+                  <button>削除</button>
+                <% end%>
+              </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%# タスクが存在しない場合 %>
 <% if @no_tasks_message.present? %>

@@ -1,9 +1,12 @@
-<h1>タスク編集</h1>
+<h1 class="title">タスク編集</h1>
 
 <%# エラーメッセージ %>
 <%= render "shared/error_message" %>
 
 <%# フォーム %>
-<%= render "shared/form", task_model: @current_task %>
-
-<%= link_to '戻る', tasks_path %>
+<div class="edit-form">
+    <%= render "shared/form", task_model: @current_task %>
+    <%= link_to tasks_path do %>
+        <button>戻る</button>
+    <% end %>
+</div>
