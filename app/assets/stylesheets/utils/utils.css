@@ -1,0 +1,33 @@
+a {
+    text-decoration: none;
+}
+
+.title {
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-logout {
+    text-align: center;
+}
+
+.form {
+    text-align: center;
+}
+.input {
+    width: 50%;
+}
+
+table {
+    /* text-align: center; */
+    margin: auto;
+}
+
+.edit-form {
+    display: flex;
+}

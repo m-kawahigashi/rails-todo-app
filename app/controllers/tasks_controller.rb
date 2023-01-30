@@ -27,7 +27,7 @@ class TasksController < ApplicationController
             @current_task.update!(task_params)
         rescue ActiveRecord::RecordInvalid => e
             p e
-            @update_err_message = e.message
+            @err_message = e.message
             render 'edit' and return
         end
         redirect_to tasks_path and return

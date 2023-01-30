@@ -1,13 +1,12 @@
-<h1>タスク編集</h1>
+<h1 class="title">タスク編集</h1>
 
 <%# エラーメッセージ %>
-<% if @update_err_message.present? %>
-    <h3 style="color: red"><%= @update_err_message %></h3>
-<% end %>
+<%= render "shared/error_message" %>
 
-<%= form_with(model: @current_task, local: true ) do |f| %>
-  <div><%= f.text_field :task %></div>
-  <div><%= f.submit %></div>
-<% end %>
-
-<%= link_to '戻る', tasks_path %>
+<%# フォーム %>
+<div class="edit-form">
+    <%= render "shared/form", task_model: @current_task %>
+    <%= link_to tasks_path do %>
+        <button>戻る</button>
+    <% end %>
+</div>
