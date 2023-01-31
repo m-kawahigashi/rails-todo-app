@@ -15,7 +15,12 @@ class TasksController < ApplicationController
             p e
             redirect_to tasks_path, flash: { error: e.message} and return
         end
-        redirect_to tasks_path and return
+        respond_to do |format|
+            format.html { redirect_to tasks_path }
+            format.json { render json: @task }
+        end
+
+        # redirect_to tasks_path and return
     end
 
     def edit
