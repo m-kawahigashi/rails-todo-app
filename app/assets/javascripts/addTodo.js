@@ -1,5 +1,4 @@
 $(document).on("turbolinks:load", function() {
-    // 追加するHTMLを生成
     function addHTML(task) {
         var html = `
                     <tr>
