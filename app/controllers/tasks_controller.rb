@@ -13,9 +13,14 @@ class TasksController < ApplicationController
             @task.save!
         rescue ActiveRecord::RecordInvalid => e
             p e
-            redirect_to tasks_path, flash: { error: e.message} and return
+            redirect_to tasks_path, flash: { error: e.message}
+            format.html { redirect_to tasks_path, flash: { error: e.message} }
+            format.json { render error: e.message }
         end
-        redirect_to tasks_path and return
+        respond_to do |format|
+            format.html { redirect_to tasks_path }
+            format.json { render json: @task }
+        end
     end
 
     def edit

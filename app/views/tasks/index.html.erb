@@ -4,7 +4,7 @@
 <%# </div> %>
 
 <%# エラーメッセージ %>
-<div>
+<div class="error-message">
   <%= render "shared/error_message" %>
 </div>
 
@@ -16,7 +16,7 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody class="tasklist-task">
       <% @tasks.each do |task| %>
           <tr>
               <td>

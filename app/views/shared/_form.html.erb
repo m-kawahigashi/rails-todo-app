@@ -1,4 +1,4 @@
-<%= form_with(model: task_model, local: true, class: "form" ) do |f| %>
-  <%= f.text_field :task, placeholder: "タスクを入力してください", class: "input" %>
-  <%= f.submit "登録" %>
+<%= form_with(model: task_model, local: true, class: "form js-form" ) do |f| %>
+  <%= f.text_field :task, class: "js-task" , placeholder: "タスクを入力してください", class: "input" %>
+  <%= f.submit "登録", class: "js-submit" %>
 <% end %>
