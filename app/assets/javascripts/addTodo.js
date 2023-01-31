@@ -16,8 +16,14 @@ $(document).on("turbolinks:load", function() {
         return html;
     }
 
+    function errMessage(err) {
+        var errMsg = `<h3 style="color: red">${ err }</h3>`
+        return errMsg;
+    }
+
     $('.js-form').on('submit', function(e) {
         e.preventDefault();
+        $('.error-message').empty();
 
         var formData = new FormData(this);
         var url = $(this).attr('action')
@@ -37,8 +43,12 @@ $(document).on("turbolinks:load", function() {
                 $('.js-form')[0].reset();
                 $('.js-submit').prop('disabled', false);
               })
-              .fail(function() {
-                alert('error')
+              .fail(function(xhr, status, error) {
+                var html = errMessage(error);
+                console.log(error);
+                console.log(xhr);
+                console.log(status);
+                $('.error-message').append(html);
                 $('.js-submit').prop('disabled', false);
               });
     });
